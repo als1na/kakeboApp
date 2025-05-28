@@ -1,21 +1,25 @@
 
-// src/lib/firebase.ts
-import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
-import { getAuth, type Auth, GoogleAuthProvider, signInWithPopup, signInAnonymously } from "firebase/auth";
+/import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
+import {
+  getAuth,
+  type Auth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInAnonymously,
+} from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
 
 // =====================================================================================
-// !! ¡ASEGÚRATE DE QUE ESTOS VALORES SEAN LOS DE TU PROYECTO FIREBASE REAL! !!
-// Los encuentras en la consola de Firebase:
-// Configuración del proyecto > General > Tus apps > Configuración de SDK.
+// 🔐 Configuración segura usando variables de entorno (.env.local)
 // =====================================================================================
+
 const firebaseConfig = {
-  apiKey: "AIzaSyC3G4A_U-tO-5zPUd7LTXeEnJL804LjkD8",
-  authDomain: "kakeboapp.firebaseapp.com",
-  projectId: "kakeboapp",
-  storageBucket: "kakeboapp.firebasestorage.app",
-  messagingSenderId: "1010002346878",
-  appId: "1:1010002346878:web:c24cafcc186133cf63292f"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
 };
 
 let app: FirebaseApp;
@@ -32,4 +36,3 @@ auth = getAuth(app);
 db = getFirestore(app);
 
 export { app, auth, db, GoogleAuthProvider, signInWithPopup, signInAnonymously };
-
